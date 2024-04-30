@@ -5,22 +5,25 @@ import { useState } from 'react';
 export default function App() {
 
   const [toDoText,setToDoText] = useState("");
+  const [toDoList,setToDoList] = useState([]);
 
   function textInputChange(textChanged){
     setToDoText(textChanged);
-  }
+  }`31  wsZ`
 
-  function addTodo(){
-console.log(toDoText);
+  function addToDo(){
+    setToDoList((currentTodoList) => [...toDoList,toDoText]);
   }
 
   return (
     <View style={styles.container} >
     <View style={styles.inputContainer}>
       <TextInput onChangeText={textInputChange} style={styles.textInput} placeholder='Your todo'/>
-      <Button onPress={addTodo} title='Add todo'/>
+      <Button onPress={addToDo} title='Add todo'/>
     </View>
-    <Text style={styles.todoList}>The Todo List...</Text>
+    <View style={styles.todoList}>
+    {toDoList.map((todo)=><Text key={todo}>{todo}</Text>)}
+    </View>
     </View>
   );
 }
